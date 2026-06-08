@@ -1,0 +1,22 @@
+name: 02 - Anti-AI Integrity Gate
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  integrity-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Branch Context
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Initialize Runtime Environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Execute Analytical Validation Engine
+        run: python scripts/enforce_heuristics.py
